@@ -1,6 +1,6 @@
 import sys
 
-class HexText():
+class RedText():
     set1 = {
     1: " ", 2: "E", 3: "T", 4: "A",
     5: "O", 6: "I", 7: "N", 8: "S",
@@ -24,7 +24,7 @@ class HexText():
             if n == 15:
                 shift = not shift
                 continue
-            output += HexText.master[shift][n]
+            output += RedText.master[shift][n]
         return output
 
     @staticmethod
@@ -37,29 +37,29 @@ class HexText():
         shift = False
 
         for c in input.upper():
-            if c not in HexText.master[shift].values():
-                if c not in HexText.master[not shift].values():
+            if c not in RedText.master[shift].values():
+                if c not in RedText.master[not shift].values():
                     raise ValueError(f"Unsupported character: {c!r}")
 
                 outlist.append(15)
                 shift = not shift
 
-            n = HexText.revlookup(HexText.master[shift], c)
+            n = RedText.revlookup(RedText.master[shift], c)
             outlist.append(n)
 
         return outlist  
 
 if len(sys.argv) < 3:
-    print("""Usage: hexText.py -[e | d] input """)
+    print("""Usage: redText.py -[e | d] input """)
     sys.exit()
 else:
     match sys.argv[1]:
         case "-e": 
-            print(HexText.encode(sys.argv[2]))
+            print(RedText.encode(sys.argv[2]))
         case "-d":
-            print(HexText.decode(sys.argv[2]))
+            print(RedText.decode(sys.argv[2]))
         case _: 
-            print("""Usage: hexText.py -[e | d] input """)
+            print("""Usage: redText.py -[e | d] input """)
             sys.exit()
 
 
